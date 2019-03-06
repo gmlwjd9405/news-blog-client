@@ -18,6 +18,8 @@
 ---
 
 ## 관련 개념
+- main.js
+  - 기본적으로 application의 설정(plugin, lib), 구조도의 blueprint를 볼 수 있어야 함 
 - Vue CLI 2.x VS Vue CLI 3.x
   - webpack 설정 파일이 노출되지 않음
     - **2.x**: `webpack.config.js` 존재
@@ -43,6 +45,39 @@
 
    ```
 - Vue Router
+  - 설치 
+   ```bash
+   $ npm install vue-router --save
+   ```
+  - 기본 설정
+    - src/router directory 생성 후 하위에 index.js 생성
+   ```js
+   /* src/router/index.js */
+   import Vue from 'vue';
+   import VueRouter from 'vue-router';
+   import MainView from "../views/MainView.vue" // custom path
+   
+   Vue.use(VueRouter);
+   export const router = new VueRouter({ // router instance 생성
+     routes: [
+       {
+         path: '/', // url 주소
+         component: MainView, // url 주소로 갔을 때 표시될 Component (Page로 사용되는 Component)
+       },
+       // ... (같은 구조로 route 정보 추가)
+     ]
+   });
+   ```
+   ```js
+   /* src/main.js */
+   import { router } from "./router/index.js";
+
+   new Vue({
+     render: h => h(App),
+     router, // 추가
+   }).$mount('#app')
+   ```
+  
   
 - API 비동기 처리
 
