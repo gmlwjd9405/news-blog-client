@@ -29,15 +29,18 @@
     - **2.x**에서는 ES6에 대한 이해도가 낮지만, **3.x**에서는 기본 세팅이 ES6로 되어 있음
   - 생성 명령어
    ```bash
-   // 2.x - vue init '프로젝트 템플릿 이름' '파일 위치'
-   $ vue init webpack-simple [vue-news]
+   // 2.x
+   $ vue init webpack-simple [vue-news] // 생성: vue init '프로젝트 템플릿 이름' '파일 위치'
+   $ npm run dev // 실행
    ```
    ```
    $ npm install -g @vue/cli
    $ npm uninstall -g vue-cli
    
-   // 3.x - vue create '프로젝트 이름'
-   $ vue create [vue-news]
+   // 3.x
+   $ vue create [vue-news] // 생성: vue create '프로젝트 이름'
+   $ npm run serve // 실행
+
    ```
 - Vue Router
   
