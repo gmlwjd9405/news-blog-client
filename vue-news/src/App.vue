@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    Hello
+    <!-- url 주소에 따라서 지정한 Component가 뿌려짐 -->
+    <router-view></router-view>
   </div>
 </template>
 
