@@ -92,56 +92,121 @@
 
 ### JavaScript
 - this 바인딩 (4가지)
-  - 1) 브라우저 Window 객체를 가리키는 this
+1. 브라우저 Window 객체를 가리키는 this
     - return: `Window {...}`
-  - 함수 안의 this -> Window 객체 
-   ```js
-   function sum(a, b) { 
-     console.log(this); // return: Window {...}
-     return a + b;
-   }
-   ```
-  - 2) 인스턴스를 정의한 객체 자체를 가리키는 this (생성자 함수를 가리킴)
-   ```js
-   function Vue(el) {
-     console.log(this); // return: Vue {}
-     this.el = el;
-   }
-   new Vue('#app');
-   ```
-  - 3) 비동기 처리에서의 this
-   ```js
-   created() {
-     console.log('호출 전: ', this); // return: VueComponent { ... }
-     axios.get('')
+2. 함수 안의 this -> Window 객체 
+    ```js
+    function sum(a, b) { 
+      console.log(this); // return: Window {...}
+      return a + b;
+    }
+    ```
+3. 인스턴스를 정의한 객체 자체를 가리키는 this (생성자 함수를 가리킴)
+    ```js
+    function Vue(el) {
+      console.log(this); // return: Vue {}
+      this.el = el;
+    }
+    new Vue('#app');
+    ```
+4. 비동기 처리에서의 this
+    ```js
+    created() {
+      console.log('호출 전: ', this); // return: VueComponent { ... }
+      axios.get('')
       .then(function(response) {
         console.log('호출 후: ', this); // return: undefined
         this.users = response.data;
       })
       .catch(function(error) {
       });
-   }
+    }
    ```
     - 데이터를 Server로부터 가져오기 위해서는 http 프로토콜을 통해 Server에 갔다오기 때문에 비동기 호출을 해야 함
     - 현재 위치(비동기 호출되는 시점)에서 가리키는 this와 그것을 벗어난 this가 생긴다.
       - 기존의 것을 가리키고 싶으면 this 바인딩을 새로 해야한다.
       - 즉, `var vm = this;`, `vm.users = response.data`로 사용해야 한다.
       - 하지만 ES6 화살표 함수를 사용하면 this는 비동기 호출되는 시점의 this를 가지고 온다. (아래 참고)
-  - 4) 화살표 함수의 this
-   ```js
-   created() {
-     console.log('호출 전: ', this); // return: VueComponent { ... }
-     axios.get('')
-      .then(response => {
-        console.log('호출 후: ', this); // return: VueComponent { ... }
-        this.users = response.data;
-      })
-      .catch();
-   }
-   ```
+    - **[참고]** 화살표 함수의 this
+      ```js
+      created() {
+        console.log('호출 전: ', this); // return: VueComponent { ... }
+        axios.get('URL_ADDRESS')
+        .then(response => {
+          console.log('호출 후: ', this); // return: VueComponent { ... }
+          this.users = response.data;
+        })
+        .catch();
+      }
+      ```
 - 비동기 처리
 1. Callback
+    - **Callback:** 특정 함수/기능이 종료되자마자 실행되는 함수
+    - **Callback 함수:** 함수를 인자로 전달하는 함수 
+    - Callback 예시
+      ```js
+      function fetchData() {
+        var result = [];
+
+        $ajax({
+          url: 'URL_ADDRESS',
+          success: function(data) {
+            console.log('data 호출 결과', data); // 2.
+            result = data;
+            // 해당 위치에서 함수 결과 출력 
+          }
+        });
+
+        console.log('함수 결과', result); // 1.
+      }
+      ```
+      - 데이터 요청에 대한 응답을 기다리기 전에 다음 코드를 수행한다. 
+      - 즉, ajax보다 함수 결과 log가 먼저 호출되기 때문에 result에 데이터를 받아오지 못한다. 
+      - result를 출력하고 싶으면 success 후에 출력해야 한다.
+        - "Promise" 기법 (아래 참고)
+      - **Callback Hell, Nested**
+        - Callback을 계속 쌓다보면 여러 문제가 생긴다.
+          - 코드 indent 문제 
+          - 절차적인 사고에 위배
+        - 이런 문제를 해결하기 위해 "Promise" (아래 참고) 사용
 2. Promise
+    - **Promise:** 효율적인 Callback 관리 및 직관적인 코드 구현을 위해 사용하는 비동기 처리 패턴
+      - [Promise MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise) 참고 
+    - Promise Chaining도 가능
+      - [프로미스 쉽게 이해하기](https://joshua1988.github.io/web-development/javascript/promise-for-beginners/) 참고
+    - cf. ajax의 success 속성
+      - ajax 요청이 성공해야 실행되도록하는 속성 
+      - ajax lib에서 제공하므로 'ajax에서만' 유효한 Callback 함수
+    - Promise 구성
+      ```js
+      new Promise
+        .then(성공 후 수행할 내용)
+        .catch(실패 후 수행할 내용);
+      ```
+    - Promise 예시
+      ```js
+      function callAjax() { // Promise 객체 반환
+        return new Promise(function(resolve, reject) {
+          $.ajax({
+            url: 'URL_ADDRESS',
+            success: function(data) {
+              resolve(data); // resolve된 상태의 Promise가 .then으로 넘어간다.
+            }
+          });
+        });
+      }
+
+      function fetchData() {
+        var result = [];
+
+        callAjax()
+          .then(function(data) { // resolve된 data가 함수로 들어온다.
+            console.log('데이터 호출 결과', data);
+            result = data;
+            console.log('함수 결과', result);
+          });
+      }
+    ```
 
 ---
 
