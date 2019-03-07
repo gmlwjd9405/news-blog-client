@@ -11,16 +11,20 @@ export const router = new VueRouter({
   // router instance 생성
   routes: [
     {
+      path: "/",
+      redirect: "/news"
+    },
+    {
       path: "/news", // url 주소
-      component: NewsView, // url 주소로 갔을 때 표시될 Component (Page로 사용되는 Component)
+      component: NewsView // url 주소로 갔을 때 표시될 Component (Page로 사용되는 Component)
     },
     {
-      path: "/ask", 
-      component: AskView,
+      path: "/ask",
+      component: AskView
     },
     {
-      path: "/jobs", 
-      component: JobsView, 
+      path: "/jobs",
+      component: JobsView
     }
   ]
 });

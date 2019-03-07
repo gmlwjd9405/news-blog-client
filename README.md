@@ -70,7 +70,7 @@
    ```
    ```js
    /* src/main.js */
-   import { router } from "./router/index.js";
+   import { router } from "./router/index.js"; // 반드시 { router }로 받는다. (이름 변경 X)
 
    new Vue({
      render: h => h(App),
