@@ -46,9 +46,9 @@
    ```
 - Vue Router
   - 설치 
-   ```bash
-   $ npm install vue-router --save
-   ```
+    ```bash
+    $ npm install vue-router --save
+    ```
   - 기본 설정
     - src/router directory 생성 후 하위에 index.js 생성
    ```js
@@ -88,6 +88,16 @@
   - data 요청은 `created`, `beforeMount` lifecycle에서 많이 함
     - mounted 후에 요청을 하게 되면 데이터 안에 값을 넣으면 화면이 다시 그려지기 때문에 
     - [Vue가 화면을 그리는 구조](https://vuejs.org/v2/guide/reactivity.html#ad) 참고
+- Vuex
+  - **Vuex**(상태 관리 도구)를 이용한 데이터 호출 방법
+    - 상태: 여러 Component 간의 공유되는 data 속성
+    - Vuex의 State에 API를 담아서 화면에 표시
+  - 설치 
+    ```bash
+    $ npm install vuex
+    ```
+  - 기본 설정
+
 - API 비동기 처리
 
 ### JavaScript
@@ -206,7 +216,7 @@
             console.log('함수 결과', result);
           });
       }
-    ```
+      ```
 
 ---
 
