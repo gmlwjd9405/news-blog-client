@@ -40,10 +40,11 @@ export const store = new Vuex.Store({
           console.log(error);
         });
     },
-    FETCH_JOBS(context) {
+    /* Distructuring 이용 - 인자값의 속성을 바로 사용 */
+    FETCH_JOBS({ commit }) { 
       fetchJobsList()
-        .then(response => {
-          context.commit("SET_JOBS", response.data);
+        .then(({ data }) => {
+          commit("SET_JOBS", data);
         })
         .catch(error => {
           console.log(error);

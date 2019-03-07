@@ -5,10 +5,6 @@
 </template>
 
 <script>
-import {
-  fetchJobsList
-} from "../api/index.js";
-
 export default {
   created() {
     this.$store.dispatch('FETCH_JOBS');
