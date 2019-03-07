@@ -17,7 +17,6 @@ export default {
     /* callback의 this 바인딩을 View Component를 바라보도록! (화살표 함수는 없어도 됨) */
     // var vm = this; 
 
-    // axios.get('http://localhost:8080/api/users')
     // axios.get('https://api.hnpwa.com/v0/news/1.json')
     fetchNewsList()
       .then(response => {
