@@ -18,8 +18,31 @@
 ---
 
 ## 관련 개념
-- main.js
-  - 기본적으로 application의 설정(plugin, lib), 구조도의 blueprint를 볼 수 있어야 함 
+- Dir 구조
+  - main.js
+    - 기본적으로 application의 설정(plugin, lib), 구조도의 blueprint를 볼 수 있어야 함 
+  - api/index.js
+    1. HTTP Request & Response와 관련된 기본 설정
+        - `baseUrl`
+    2. API 함수들을 정리
+        - ```axios.get(`${config.baseUrl}posts`)```
+  - components/
+    - 화면을 그리는 Components
+    - 이벤트가 일어나면 상위에 알리고 결과 데이터를 받아 화면을 갱신한다.
+  - views/
+    - 데이터를 가지고 조작하는 Components
+    - vuex의 actions를 호출해서 데이터를 조작한다.
+    - `this.$store.dispath("store actions의 함수 이름");`
+  - store/index.js (Vuex이용 - 아래 참고)
+    - actions
+      1. BackEnd에서 API(api/index.js에 정의)를 호출한다. 
+          - 즉, 비동기 호출은 모두 actions에서 처리한다.
+      2. API 응답 결과 데이터를 Mutations에 보낸다.
+          - `context.commit("mutations 함수 이름", response.data)`
+    - mutations
+      - 받아온 데이터로 state의 속성을 변경한다.
+    - state
+      - 여러 Component가 공유하는 데이터를 관리한다.
 - Vue CLI 2.x VS Vue CLI 3.x
   - webpack 설정 파일이 노출되지 않음
     - **2.x**: `webpack.config.js` 존재
@@ -92,11 +115,14 @@
   - **Vuex**(상태 관리 도구)를 이용한 데이터 호출 방법
     - 상태: 여러 Component 간의 공유되는 data 속성
     - Vuex의 State에 API를 담아서 화면에 표시
+  - <img src="./images/vuex.png" width="60%" height="60%">
   - 설치 
     ```bash
     $ npm install vuex
     ```
-  - 기본 설정
+  - 기본 구조 과정 예시
+    - <img src="./images/vuex-example.png" width="60%" height="60%">
+    - 
 
 - API 비동기 처리
 
@@ -223,6 +249,7 @@
 ## Development Environment
 - [Vue.js](https://vuejs.org/)
 - [vue cli 3.x](https://cli.vuejs.org/)
+- [vuex](https://vuex.vuejs.org/kr/)
 
 ## References
 * [장기효(캡틴 판교) - Vue.js 완벽 가이드](https://www.inflearn.com/course/vue-js/)
