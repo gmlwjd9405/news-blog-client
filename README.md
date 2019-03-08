@@ -43,7 +43,8 @@
       - 받아온 데이터로 state의 속성을 변경한다.
     - state
       - 여러 Component가 공유하는 데이터를 관리한다.
-- Vue CLI 2.x VS Vue CLI 3.x
+    - 추가로 모듈화할 수 있다. (mutations.js, actions.js)
+- Vue CLI 2.x VS [Vue CLI 3.x](https://cli.vuejs.org/)
   - webpack 설정 파일이 노출되지 않음
     - **2.x**: `webpack.config.js` 존재
     - **3.x**: webpack을 위해 별도의 [설정](https://cli.vuejs.org/guide/webpack.html#working-with-webpack)이 필요
@@ -67,7 +68,7 @@
    $ npm run serve // 실행
 
    ```
-- Vue Router
+- [Vue Router](https://router.vuejs.org/kr/)
   - 설치 
     ```bash
     $ npm install vue-router --save
@@ -110,19 +111,28 @@
    ```
   - data 요청은 `created`, `beforeMount` lifecycle에서 많이 함
     - mounted 후에 요청을 하게 되면 데이터 안에 값을 넣으면 화면이 다시 그려지기 때문에 
-    - [Vue가 화면을 그리는 구조](https://vuejs.org/v2/guide/reactivity.html#ad) 참고
-- Vuex
+    - [Vue가 화면을 리는 구조](https://vuejs.org/v2/guide/reactivity.html#ad) 참고
+- [Vuex](https://vuex.vuejs.org/kr/guide/)
   - **Vuex**(상태 관리 도구)를 이용한 데이터 호출 방법
-    - 상태: 여러 Component 간의 공유되는 data 속성
+    - Component에서 직접 API를 호출해서 data를 처리하던 것을 중간에 Vuex를 통해서 data를 전달하고 관리할 수 있다.
     - Vuex의 State에 API를 담아서 화면에 표시
-  - <img src="./images/vuex.png" width="60%" height="60%">
+  <img src="./images/vuex.png" width="60%" height="60%">
+    - **상태(state):** 여러 Component 간의 공유되는 data 속성
+    - **actions**: Server에서 API(api/index.js)를 호출하고 결과 data를 mutation으로 commit한다.
+    - **mutations**: 인자로 받은 결과 data로 state 속성값을 변경한다.
+    - **getters**: 상태값을 반환한다. (Component의 computed와 동일한 속성)
   - 설치 
     ```bash
     $ npm install vuex
     ```
   - 기본 구조 과정 예시
     - <img src="./images/vuex-example.png" width="60%" height="60%">
-    - 
+    1. Container Component에서 Vuex의 actions를 dispatch한다.
+    2. Vuex actions에서 Server의 API(api/index.js)를 호출하고 결과 data를 mutation으로 commit한다.
+    3. Vuex mutations에서 인자로 받은 결과 data로 state 속성값을 변경한다.
+    4. 변경된 state 값을 이용해 Container Component의 데이터 값을 갱신한다.
+        - mapGetters 배열 표기법으로 Vuex getters의 값을 받아올 수 있다.
+        - Ex. AskView.vue의 computed)
 
 - API 비동기 처리
 
@@ -250,6 +260,7 @@
 - [Vue.js](https://vuejs.org/)
 - [vue cli 3.x](https://cli.vuejs.org/)
 - [vuex](https://vuex.vuejs.org/kr/)
+- [vue router](https://router.vuejs.org/kr/)
 
 ## References
 * [장기효(캡틴 판교) - Vue.js 완벽 가이드](https://www.inflearn.com/course/vue-js/)
