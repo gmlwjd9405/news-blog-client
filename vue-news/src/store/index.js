@@ -18,6 +18,9 @@ export const store = new Vuex.Store({
   getters: { 
     fetchedAsk(state) {
       return state.ask;
+    },
+    fetchedItem(state) {
+      return state.item;
     }
   },
   mutations, // 3. data를 state에 저장 
