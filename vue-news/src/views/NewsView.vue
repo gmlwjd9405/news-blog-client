@@ -1,21 +1,17 @@
 <template>
 <div>
-  <div v-for="user in this.$store.state.news">{{ user.title }}</div>
+  <!-- title을 클릭했을 때 item 안의 url(v-bind)로 이동하도록 설정 -->
+  <p v-for="item in this.$store.state.news">
+    <a v-bind:href="item.url">{{ item.title }}</a>
+    <small>{{ item.time_ago }} by {{ item.user }}</small>
+  </p>
 </div>
 </template>
 
 <script>
 export default {
   created() {
-    this.$store.dispatch('FETCH_NEWS'); // vuex actions를 dispatch
-
-    //   // axios.get('https://api.hnpwa.com/v0/news/1.json') => api index.js
-    //   fetchNewsList() // 1. 데이터 호출 부분 => vuex actions
-    //     .then(response => {
-    //       this.users = response.data; // 2. 데이터 저장 부분
-    //       console.log(response);
-    //     })
-    //     .catch(error => console.log(error));
+    this.$store.dispatch("FETCH_NEWS"); // vuex actions를 dispatch
   }
 };
 </script>
