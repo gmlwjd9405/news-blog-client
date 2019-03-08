@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
     jobs: [],
     ask: [],
     user: {}, // 객체 
+    item: [], // 배열
   },
   /* computed와 동일한 속성 */
   getters: { 

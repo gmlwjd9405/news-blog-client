@@ -2,7 +2,10 @@
 <div>
   <!-- title을 클릭했을 때 item 안의 url(v-bind)로 이동하도록 설정 -->
   <p v-for="item in fetchedAsk">
-    <a v-bind:href="item.url">{{ item.title }}</a>
+    <!-- <a v-bind:href="item.url">{{ item.title }}</a> -->
+    <router-link v-bind:to="`item/${item.id}`">
+      {{ item.title }}
+    </router-link>
     <small>{{ item.time_ago }} by {{ item.user }}</small>
   </p>
 </div>

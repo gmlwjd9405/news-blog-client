@@ -1,4 +1,4 @@
-import { fetchNewsList, fetchJobsList, fetchAskList, fetchUserInfo } from "../api/index.js";
+import { fetchNewsList, fetchJobsList, fetchAskList, fetchUserInfo, fetchCommentItem } from "../api/index.js";
 
 export default {
   /* 1. BackEnd에서 불러온 API를 actions에서 호출 */
@@ -43,6 +43,15 @@ export default {
       })
       .catch(error => {
         console.log(error);
+      });
+  },
+  FETCH_ITEM({ commit }, itemId) {
+    fetchCommentItem(itemId)
+      .then(({ data }) => {
+        commit('SET_ITEM', data);
       })
-  }
+      .catch(error => {
+        console.log(error);
+      });
+  },
 };
