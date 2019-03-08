@@ -2,7 +2,11 @@
 <div-html>
   <!-- 사용자 상세 정보 -->
   <section>
-    <UserProfile></UserProfile>
+    <UserProfile>
+      <!-- <router-link slot="username" :to="`/user/${fetchedItem.user}`">
+        {{ fetchedItem.user }}
+      </router-link> -->
+    </UserProfile>
   </section>
 
   <!-- 질문 타이틀 -->
