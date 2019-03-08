@@ -1,4 +1,5 @@
 import { fetchNewsList, fetchJobsList, fetchAskList } from "../api/index.js";
+
 export default {
   /* 1. BackEnd에서 불러온 API를 actions에서 호출 */
   // 즉, 비동기 호출은 모두 actions에서 처리
