@@ -27,10 +27,12 @@
     2. API 함수들을 정리
         - ```axios.get(`${config.baseUrl}posts`)```
   - components/
-    - 화면을 그리는 Components
+    - **Presentational Component**
+      - 화면을 그리는 Components
     - 이벤트가 일어나면 상위에 알리고 결과 데이터를 받아 화면을 갱신한다.
   - views/
-    - 데이터를 가지고 조작하는 Components
+    - **Container Component**
+      - 데이터를 가지고 조작하는 Components
     - vuex의 actions를 호출해서 데이터를 조작한다.
     - `this.$store.dispath("store actions의 함수 이름");`
   - store/index.js (Vuex이용 - 아래 참고)
@@ -111,30 +113,28 @@
    ```
   - data 요청은 `created`, `beforeMount` lifecycle에서 많이 함
     - mounted 후에 요청을 하게 되면 데이터 안에 값을 넣으면 화면이 다시 그려지기 때문에 
-    - [Vue가 화면을 리는 구조](https://vuejs.org/v2/guide/reactivity.html#ad) 참고
+    - [Vue가 화면을 그리는 구조](https://vuejs.org/v2/guide/reactivity.html#ad) 참고
 - [Vuex](https://vuex.vuejs.org/kr/guide/)
   - **Vuex**(상태 관리 도구)를 이용한 데이터 호출 방법
     - Component에서 직접 API를 호출해서 data를 처리하던 것을 중간에 Vuex를 통해서 data를 전달하고 관리할 수 있다.
     - Vuex의 State에 API를 담아서 화면에 표시
-  <img src="./images/vuex.png" width="60%" height="60%">
-    - **상태(state):** 여러 Component 간의 공유되는 data 속성
-    - **actions**: Server에서 API(api/index.js)를 호출하고 결과 data를 mutation으로 commit한다.
-    - **mutations**: 인자로 받은 결과 data로 state 속성값을 변경한다.
-    - **getters**: 상태값을 반환한다. (Component의 computed와 동일한 속성)
+      <img src="./images/vuex.png" width="60%" height="60%">
+      - **상태(state):** 여러 Component 간의 공유되는 data 속성
+      - **actions**: Server에서 API(api/index.js)를 호출하고 결과 data를 mutation으로 commit한다.
+      - **mutations**: 인자로 받은 결과 data로 state 속성값을 변경한다.
+      - **getters**: 상태값을 반환한다. (Component의 computed와 동일한 속성)
   - 설치 
     ```bash
     $ npm install vuex
     ```
   - 기본 구조 과정 예시
-    - <img src="./images/vuex-example.png" width="60%" height="60%">
+    <img src="./images/vuex-example.png" width="60%" height="60%">
     1. Container Component에서 Vuex의 actions를 dispatch한다.
     2. Vuex actions에서 Server의 API(api/index.js)를 호출하고 결과 data를 mutation으로 commit한다.
     3. Vuex mutations에서 인자로 받은 결과 data로 state 속성값을 변경한다.
-    4. 변경된 state 값을 이용해 Container Component의 데이터 값을 갱신한다.
-        - mapGetters 배열 표기법으로 Vuex getters의 값을 받아올 수 있다.
-        - Ex. AskView.vue의 computed)
-
-- API 비동기 처리
+    4. 변경된 state 값을 이용해 Presentation Component의 화면을 갱신한다.
+        - computed에서 mapGetters 배열 표기법으로 Vuex getters의 값을 받아올 수 있다.
+        - Ex. AskView.vue의 computed
 
 ### JavaScript
 - this 바인딩 (4가지)

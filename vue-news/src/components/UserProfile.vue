@@ -5,22 +5,20 @@
     </div>
     <div class="user-description">
       <!-- <router-link :to="`/user/${userInfo.user}`">{{ userInfo.id }}</router-link> -->
-      <div>{{ info.id }}</div>
-      <div class="time">{{ info.created }}</div>
+      <div>{{ userInfo.id }}</div>
+      <div class="time">{{ userInfo.created }}</div>
+      <slot name="karma"></slot>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    info: Object,
+  computed: {
+    userInfo() {
+      return this.$store.state.user;
+    },
   },
-  // computed: {
-  //   userInfo() {
-  //     return this.$store.state.user;
-  //   },
-  // },
 };
 </script>
 
