@@ -12,9 +12,10 @@ export const store = new Vuex.Store({
     jobs: [],
     ask: [],
   },
+  /* computed와 동일한 속성 */
   getters: { 
     fetchedAsk(state) {
-      return state.ack;
+      return state.ask;
     }
   },
   mutations, // 3. data를 state에 저장 
