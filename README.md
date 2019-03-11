@@ -118,7 +118,7 @@
   - **Vuex**(상태 관리 도구)를 이용한 데이터 호출 방법
     - Component에서 직접 API를 호출해서 data를 처리하던 것을 중간에 Vuex를 통해서 data를 전달하고 관리할 수 있다.
     - Vuex의 State에 API를 담아서 화면에 표시
-      <img src="./images/vuex.png" width="60%" height="60%">
+    - -> <img src="./images/vuex.png" width="60%" height="60%">
       - **상태(state):** 여러 Component 간의 공유되는 data 속성
       - **actions**: Server에서 API(api/index.js)를 호출하고 결과 data를 mutation으로 commit한다.
       - **mutations**: 인자로 받은 결과 data로 state 속성값을 변경한다.
@@ -128,7 +128,7 @@
     $ npm install vuex
     ```
   - 기본 구조 과정 예시
-    <img src="./images/vuex-example.png" width="60%" height="60%">
+  - -> <img src="./images/vuex-example.png" width="60%" height="60%">
     1. Container Component에서 Vuex의 actions를 dispatch한다.
     2. Vuex actions에서 Server의 API(api/index.js)를 호출하고 결과 data를 mutation으로 commit한다.
     3. Vuex mutations에서 인자로 받은 결과 data로 state 속성값을 변경한다.
@@ -136,7 +136,7 @@
         - computed에서 mapGetters 배열 표기법으로 Vuex getters의 값을 받아올 수 있다.
         - Ex. AskView.vue의 computed
   - 사용방법에 따른 데이터 흐름
-    <img src="./images/data-flow.png" width="60%" height="60%">
+    - <img src="./images/data-flow.png" width="60%" height="60%">
 
 ### JavaScript
 - this 바인딩 (4가지)
