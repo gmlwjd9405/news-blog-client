@@ -135,6 +135,8 @@
     4. 변경된 state 값을 이용해 Presentation Component의 화면을 갱신한다.
         - computed에서 mapGetters 배열 표기법으로 Vuex getters의 값을 받아올 수 있다.
         - Ex. AskView.vue의 computed
+  - 사용방법에 따른 데이터 흐름
+    <img src="./images/data-flow.png" width="60%" height="60%">
 
 ### JavaScript
 - this 바인딩 (4가지)
